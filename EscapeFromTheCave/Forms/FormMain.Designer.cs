@@ -60,6 +60,7 @@
             labelStart.TabIndex = 1;
             labelStart.Text = "START ";
             labelStart.TextAlign = ContentAlignment.MiddleCenter;
+            labelStart.Click += labelStart_Click;
             // 
             // labelName
             // 
