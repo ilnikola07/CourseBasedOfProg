@@ -44,7 +44,23 @@ namespace EscapeFromTheCave.Forms
             {
                 timerTypewriter.Stop();
                 labelNext.Text = "Next"; // Фраза допечатана
+                if (_story.IsLastPhrase)
+                {
+                    ShowGetUpButton(); // Метод для появления твоей «кнопки»
+                }
+
             }
+        }
+
+        private void ShowGetUpButton()
+        {
+            // Скрываем кнопку "Далее" (если она была)
+            labelNext.Visible = false;
+
+            //// Показываем твой лейбл-кнопку
+            //labelGetUp.Text = "ПОДНЯТЬСЯ С ПОЛА";
+            labelGetUp.Visible = true;
+
         }
 
         private void btnNext_Click(object sender, EventArgs e) // Кнопка "далее" или "пропустить"

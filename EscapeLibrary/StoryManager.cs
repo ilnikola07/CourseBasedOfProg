@@ -55,5 +55,24 @@
                 }
             }
         }
+
+        public bool IsLastPhrase
+        {
+            get
+            {
+                // Проверяем: совпадает ли индекс текущей фразы с индексом последней в массиве
+                if (_currentPhraseIndex == _phrasesHist.Length - 1)
+                {
+                    return true; // Да, это последняя фраза
+                }
+                else
+                {
+                    return false; // Нет, впереди есть ещё текст
+                }
+            }
+        }
+
+
+
     }
 }

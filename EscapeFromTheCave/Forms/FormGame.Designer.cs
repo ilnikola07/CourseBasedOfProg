@@ -35,6 +35,8 @@
             timerTypewriter = new System.Windows.Forms.Timer(components);
             timerFadeIn = new System.Windows.Forms.Timer(components);
             labelHow = new Label();
+            imageList1 = new ImageList(components);
+            labelGetUp = new Label();
             SuspendLayout();
             // 
             // labelStory
@@ -91,6 +93,25 @@
             labelHow.Text = "Backstory. How did you end up here?";
             labelHow.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // imageList1
+            // 
+            imageList1.ColorDepth = ColorDepth.Depth32Bit;
+            imageList1.ImageSize = new Size(16, 16);
+            imageList1.TransparentColor = Color.Transparent;
+            // 
+            // labelGetUp
+            // 
+            labelGetUp.AutoSize = true;
+            labelGetUp.BackColor = Color.Transparent;
+            labelGetUp.Font = new Font("Algerian", 48F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labelGetUp.ForeColor = SystemColors.ButtonHighlight;
+            labelGetUp.Location = new Point(372, 406);
+            labelGetUp.Name = "labelGetUp";
+            labelGetUp.Size = new Size(250, 71);
+            labelGetUp.TabIndex = 6;
+            labelGetUp.Text = "Get up\r\n";
+            labelGetUp.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // FormGame
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -98,6 +119,7 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(977, 486);
+            Controls.Add(labelGetUp);
             Controls.Add(labelHow);
             Controls.Add(labelNext);
             Controls.Add(labelStory);
@@ -117,5 +139,7 @@
         private System.Windows.Forms.Timer timerTypewriter;
         private System.Windows.Forms.Timer timerFadeIn;
         private Label labelHow;
+        private ImageList imageList1;
+        private Label labelGetUp;
     }
 }
