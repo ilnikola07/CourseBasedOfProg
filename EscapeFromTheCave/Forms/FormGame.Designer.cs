@@ -28,118 +28,101 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormGame));
-            labelStory = new Label();
-            labelNext = new Label();
-            timerTypewriter = new System.Windows.Forms.Timer(components);
-            timerFadeIn = new System.Windows.Forms.Timer(components);
-            labelHow = new Label();
-            imageList1 = new ImageList(components);
-            labelGetUp = new Label();
+            labelQuestion = new Label();
+            lblPath1 = new Label();
+            lblPath2 = new Label();
+            lblPath3 = new Label();
+            lblPath4 = new Label();
             SuspendLayout();
             // 
-            // labelStory
+            // labelQuestion
             // 
-            labelStory.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            labelStory.AutoSize = true;
-            labelStory.BackColor = Color.Transparent;
-            labelStory.Font = new Font("Algerian", 48F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labelStory.ForeColor = SystemColors.ButtonHighlight;
-            labelStory.Location = new Point(2, 206);
-            labelStory.Name = "labelStory";
-            labelStory.Size = new Size(191, 71);
-            labelStory.TabIndex = 3;
-            labelStory.Text = "Текст";
-            labelStory.TextAlign = ContentAlignment.MiddleCenter;
+            labelQuestion.AutoSize = true;
+            labelQuestion.Location = new Point(567, 39);
+            labelQuestion.Name = "labelQuestion";
+            labelQuestion.Size = new Size(115, 15);
+            labelQuestion.TabIndex = 0;
+            labelQuestion.Text = "ТУТ БУДЕТ ВОПРОС";
             // 
-            // labelNext
+            // lblPath1
             // 
-            labelNext.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            labelNext.AutoSize = true;
-            labelNext.BackColor = Color.Transparent;
-            labelNext.Cursor = Cursors.Hand;
-            labelNext.Font = new Font("Algerian", 48F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            labelNext.ForeColor = SystemColors.ButtonHighlight;
-            labelNext.Location = new Point(756, 406);
-            labelNext.Name = "labelNext";
-            labelNext.Size = new Size(209, 71);
-            labelNext.TabIndex = 4;
-            labelNext.Text = "Далее";
-            labelNext.TextAlign = ContentAlignment.MiddleCenter;
-            labelNext.Click += btnNext_Click;
+            lblPath1.AutoSize = true;
+            lblPath1.BackColor = Color.Transparent;
+            lblPath1.Cursor = Cursors.Hand;
+            lblPath1.Font = new Font("Algerian", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPath1.ForeColor = SystemColors.ButtonHighlight;
+            lblPath1.Location = new Point(106, 320);
+            lblPath1.Name = "lblPath1";
+            lblPath1.Size = new Size(118, 30);
+            lblPath1.TabIndex = 2;
+            lblPath1.Text = "кнопка 1";
+            lblPath1.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // timerTypewriter
+            // lblPath2
             // 
-            timerTypewriter.Interval = 50;
-            timerTypewriter.Tick += timerTypewriter_Tick;
+            lblPath2.AutoSize = true;
+            lblPath2.BackColor = Color.Transparent;
+            lblPath2.Cursor = Cursors.Hand;
+            lblPath2.Font = new Font("Algerian", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPath2.ForeColor = SystemColors.ButtonHighlight;
+            lblPath2.Location = new Point(280, 320);
+            lblPath2.Name = "lblPath2";
+            lblPath2.Size = new Size(118, 30);
+            lblPath2.TabIndex = 3;
+            lblPath2.Text = "кнопка 2";
+            lblPath2.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // timerFadeIn
+            // lblPath3
             // 
-            timerFadeIn.Enabled = true;
-            timerFadeIn.Interval = 3000;
-            timerFadeIn.Tick += timerFadeIn_Tick;
+            lblPath3.AutoSize = true;
+            lblPath3.BackColor = Color.Transparent;
+            lblPath3.Cursor = Cursors.Hand;
+            lblPath3.Font = new Font("Algerian", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPath3.ForeColor = SystemColors.ButtonHighlight;
+            lblPath3.Location = new Point(426, 320);
+            lblPath3.Name = "lblPath3";
+            lblPath3.Size = new Size(118, 30);
+            lblPath3.TabIndex = 4;
+            lblPath3.Text = "кнопка 3";
+            lblPath3.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // labelHow
+            // lblPath4
             // 
-            labelHow.AutoSize = true;
-            labelHow.BackColor = Color.Transparent;
-            labelHow.Font = new Font("Algerian", 48F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labelHow.ForeColor = SystemColors.ButtonHighlight;
-            labelHow.Location = new Point(2, 9);
-            labelHow.Name = "labelHow";
-            labelHow.Size = new Size(1274, 71);
-            labelHow.TabIndex = 5;
-            labelHow.Text = "Backstory. How did you end up here?";
-            labelHow.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // imageList1
-            // 
-            imageList1.ColorDepth = ColorDepth.Depth32Bit;
-            imageList1.ImageSize = new Size(16, 16);
-            imageList1.TransparentColor = Color.Transparent;
-            // 
-            // labelGetUp
-            // 
-            labelGetUp.AutoSize = true;
-            labelGetUp.BackColor = Color.Transparent;
-            labelGetUp.Font = new Font("Algerian", 48F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labelGetUp.ForeColor = SystemColors.ButtonHighlight;
-            labelGetUp.Location = new Point(372, 406);
-            labelGetUp.Name = "labelGetUp";
-            labelGetUp.Size = new Size(250, 71);
-            labelGetUp.TabIndex = 6;
-            labelGetUp.Text = "Get up\r\n";
-            labelGetUp.TextAlign = ContentAlignment.MiddleCenter;
+            lblPath4.AutoSize = true;
+            lblPath4.BackColor = Color.Transparent;
+            lblPath4.Cursor = Cursors.Hand;
+            lblPath4.Font = new Font("Algerian", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPath4.ForeColor = SystemColors.ButtonHighlight;
+            lblPath4.Location = new Point(606, 320);
+            lblPath4.Name = "lblPath4";
+            lblPath4.Size = new Size(118, 30);
+            lblPath4.TabIndex = 5;
+            lblPath4.Text = "кнопка 4";
+            lblPath4.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // FormGame
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(977, 486);
-            Controls.Add(labelGetUp);
-            Controls.Add(labelHow);
-            Controls.Add(labelNext);
-            Controls.Add(labelStory);
+            ClientSize = new Size(800, 450);
+            Controls.Add(lblPath4);
+            Controls.Add(lblPath3);
+            Controls.Add(lblPath2);
+            Controls.Add(lblPath1);
+            Controls.Add(labelQuestion);
             Name = "FormGame";
-            Opacity = 0D;
-            Text = "Выберись из пещеры";
+            Text = "Попробуй выберись";
             Load += FormGame_Load;
-            KeyDown += FormGame_KeyDown;
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private Label labelStory;
-        private Label labelNext;
-        private System.Windows.Forms.Timer timerTypewriter;
-        private System.Windows.Forms.Timer timerFadeIn;
-        private Label labelHow;
-        private ImageList imageList1;
-        private Label labelGetUp;
+        private Label labelQuestion;
+        private Label lblPath1;
+        private Label lblPath2;
+        private Label lblPath3;
+        private Label lblPath4;
     }
 }

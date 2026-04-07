@@ -21,7 +21,7 @@ namespace EscapeFromTheCave
             DialogResult result = MessageBox.Show("Вы точно готовы начать игру?","Риторический вопрос",MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             if (result==DialogResult.OK)
             {
-                FormGame game = new FormGame();                               
+                FormHist game = new FormHist();                               
                 game.FormBorderStyle = FormBorderStyle.None; // Убираем заголовок и границы окна                 
                 game.WindowState = FormWindowState.Maximized;// Окно на весь экран                
                 game.TopMost = true;// Окно поверх всех остальных

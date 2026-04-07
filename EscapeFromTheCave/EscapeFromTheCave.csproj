@@ -9,6 +9,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Forms\caves_graph.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Forms\caves_graph.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\EscapeLibrary\EscapeLibrary.csproj" />
   </ItemGroup>
 
@@ -25,6 +35,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Caves\" />
   </ItemGroup>
 
 </Project>

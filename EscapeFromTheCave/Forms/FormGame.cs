@@ -1,5 +1,13 @@
-﻿using System;
-using EscapeLibrary;
+﻿using EscapeLibrary;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace EscapeFromTheCave.Forms
 {
@@ -10,94 +18,91 @@ namespace EscapeFromTheCave.Forms
             InitializeComponent();
         }
 
+        private int _currentCaveId;
+        private List<CavePath> _allPaths;
+        private MapManager _mapManager = new MapManager();
+
+        // Кнопки путей (можно положить в массив для удобства)
+        private Label[] _pathLabels;
+
+        public FormGame(int startCaveId)
+        {
+            InitializeComponent();
+            _currentCaveId = startCaveId;
+
+            // Инициализируем массив вашими лейблами из дизайнера
+            _pathLabels = new Label[] { lblPath1, lblPath2, lblPath3, lblPath4 };
+
+            // Настраиваем каждый лейбл (курсор и события)
+            foreach (var lbl in _pathLabels)
+            {
+                lbl.Cursor = Cursors.Hand; // Курсор-палец
+                //lbl.Click += OnPathLabel_Click; // Событие клика
+                lbl.MouseEnter += (s, e) => { ((Label)s).ForeColor = Color.Gold; }; // Подсветка при наведении
+                lbl.MouseLeave += (s, e) => { ((Label)s).ForeColor = Color.White; }; // Возврат цвета
+            }
+
+            _allPaths = _mapManager.ReadMap("map.txt");
+            UpdateCaveState();
+            // Загружаем карту из файла
+            _allPaths = _mapManager.ReadMap("path_to_your_file.txt");
+        }
+
         private void FormGame_Load(object sender, EventArgs e)
         {
-            labelStory.Text = ""; // Предварительно очищаем        
-            labelNext.Text = "Skip"; // Текст на кнопке в начале            
+            UpdateCaveState();
         }
 
-        private void timerFadeIn_Tick(object sender, EventArgs e)
+        private void UpdateCaveState()
         {
-            timerFadeIn.Interval = 30;
-            if (this.Opacity < 1)// Постепенно увеличиваем непрозрачность
-            {
-                this.Opacity += 0.05; // Шаг проявления 0,05
-            }
-            else
-            {
-                timerFadeIn.Stop();// Когда форма полностью проявилась
-                timerTypewriter.Start();// Запускаем таймер текста (предысторию)
-            }
-        }
+            // 1. Обновляем фон и текст вопроса (нужно будет создать словарь с описаниями пещер)
+            labelQuestion.Text = $"Вы находитесь в пещере №{_currentCaveId}. Куда идем?";
+            this.BackgroundImage = LoadCaveImage(_currentCaveId);
 
+            // 2. Ищем доступные пути
+            var availablePaths = _mapManager.GetAvailablePaths(_allPaths, _currentCaveId);
 
-        private StoryManager _story = new StoryManager();
-        private void timerTypewriter_Tick(object sender, EventArgs e) // Таймер для печати текста 
-        {
-            char? nextChar = _story.GetNextChar();
-
-            if (nextChar != null)
+            // 3. Настраиваем кнопки
+            for (int i = 0; i < _pathLabels.Length; i++)
             {
-                labelStory.Text += nextChar;
-            }
-            else
-            {
-                timerTypewriter.Stop();
-                labelNext.Text = "Next"; // Фраза допечатана
-                if (_story.IsLastPhrase)
+                if (i < availablePaths.Count)
                 {
-                    ShowGetUpButton(); // Метод для появления твоей «кнопки»
-                }
-
-            }
-        }
-
-        private void ShowGetUpButton()
-        {
-            // Скрываем кнопку "Далее" (если она была)
-            labelNext.Visible = false;
-
-            //// Показываем твой лейбл-кнопку
-            //labelGetUp.Text = "ПОДНЯТЬСЯ С ПОЛА";
-            labelGetUp.Visible = true;
-
-        }
-
-        private void btnNext_Click(object sender, EventArgs e) // Кнопка "далее" или "пропустить"
-        {
-            if (timerTypewriter.Enabled)
-            {
-                timerTypewriter.Stop(); // Если еще печатает — показываем всё сразу
-                labelStory.Text = _story.GetCurrentFullPhrase();
-                labelNext.Text = "Next";
-            }
-            else
-            {
-                if (_story.MoveToNextPhrase()) // Если фраза уже напечатана полностью — переход к следующей
-                {
-                    labelStory.Text = "";
-                    labelNext.Text = "Skip";
-                    timerTypewriter.Start();
+                    var path = availablePaths[i];
+                    _pathLabels[i].Visible = true;
+                    _pathLabels[i].Text = $"В пещеру {path.ToId} (Время: {path.Time} мин)";
+                    _pathLabels[i].Tag = path.ToId; // Сохраняем ID назначения в Tag
                 }
                 else
                 {
-                    StartActualGame(); // Метод для запуска игры
+                    _pathLabels[i].Visible = false; // Прячем лишние кнопки
                 }
             }
         }
-        private void StartActualGame()
+
+        // Общий обработчик для всех 4-х кнопок выбора пути
+        private void OnPathButtonClick(object sender, EventArgs e)
         {
-            labelStory.Visible = false; // 1. Убираем всё, что относилось к тексту?
-            labelNext.Visible = false;
-            this.Focus();
+            Button clickedButton = (Button)sender;
+            _currentCaveId = (int)clickedButton.Tag; // Получаем ID из Tag
+            UpdateCaveState(); // Перерисовываем экран для новой пещеры
         }
 
-        private void FormGame_KeyDown(object sender, KeyEventArgs e)
+        private Image LoadCaveImage(int caveId)
         {
-            if (e.KeyCode == Keys.Escape)
+            // Путь к папке с картинками (например, в папке с запущенной игрой)
+            // Картинки должны называться "1.jpg", "2.jpg" и т.д.
+            string path = Path.Combine(Application.StartupPath, "Resources", "Caves", $"{caveId}.jpg");
+
+            if (File.Exists(path))
             {
-                Application.Exit();
+                return Image.FromFile(path);
+            }
+            else
+            {
+                // Если картинка не найдена, возвращаем стандартный фон (Thurston Lava Tube)
+                return Properties.Resources.DefaultCaveBackground;
             }
         }
+
     }
 }
