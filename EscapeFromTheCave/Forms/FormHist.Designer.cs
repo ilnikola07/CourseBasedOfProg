@@ -41,12 +41,11 @@
             // 
             // labelStory
             // 
-            labelStory.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             labelStory.AutoSize = true;
             labelStory.BackColor = Color.Transparent;
             labelStory.Font = new Font("Algerian", 48F, FontStyle.Bold, GraphicsUnit.Point, 0);
             labelStory.ForeColor = SystemColors.ButtonHighlight;
-            labelStory.Location = new Point(2, 206);
+            labelStory.Location = new Point(2, 145);
             labelStory.Name = "labelStory";
             labelStory.Size = new Size(191, 71);
             labelStory.TabIndex = 3;
@@ -101,9 +100,10 @@
             // 
             // labelGetUp
             // 
-            labelGetUp.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            labelGetUp.Anchor = AnchorStyles.Bottom;
             labelGetUp.AutoSize = true;
             labelGetUp.BackColor = Color.Transparent;
+            labelGetUp.Cursor = Cursors.Hand;
             labelGetUp.Font = new Font("Algerian", 48F, FontStyle.Bold, GraphicsUnit.Point, 0);
             labelGetUp.ForeColor = SystemColors.ButtonHighlight;
             labelGetUp.Location = new Point(372, 406);
@@ -112,6 +112,7 @@
             labelGetUp.TabIndex = 6;
             labelGetUp.Text = "Get up\r\n";
             labelGetUp.TextAlign = ContentAlignment.MiddleCenter;
+            labelGetUp.Visible = false;
             labelGetUp.Click += labelGetUp_Click;
             // 
             // FormHist

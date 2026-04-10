@@ -9,12 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Forms\caves_graph.txt" />
+    <None Remove="caves_graph.txt" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Forms\caves_graph.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="caves_graph.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 

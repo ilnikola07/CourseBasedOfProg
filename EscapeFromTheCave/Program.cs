@@ -1,3 +1,5 @@
+using System.Windows.Forms;
+
 namespace EscapeFromTheCave
 {
     internal static class Program
@@ -12,6 +14,7 @@ namespace EscapeFromTheCave
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             Application.Run(new FormMain());
+
         }
     }
 }

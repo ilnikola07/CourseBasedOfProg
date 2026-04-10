@@ -25,7 +25,7 @@ namespace EscapeFromTheCave
                 game.FormBorderStyle = FormBorderStyle.None; // Убираем заголовок и границы окна                 
                 game.WindowState = FormWindowState.Maximized;// Окно на весь экран                
                 game.TopMost = true;// Окно поверх всех остальных
-                game.Show();
+                game.Show(); // Показываем форму предыстории
                 this.Hide();
             }
         }
