@@ -34,18 +34,21 @@
             buttonPath3 = new Button();
             buttonPath4 = new Button();
             panelButtons = new Panel();
+            labelEnd = new Label();
+            labelTime = new Label();
             panelButtons.SuspendLayout();
             SuspendLayout();
             // 
             // labelQuestion
             // 
-            labelQuestion.Anchor = AnchorStyles.Top;
+            labelQuestion.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             labelQuestion.AutoSize = true;
-            labelQuestion.Font = new Font("Algerian", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            labelQuestion.ForeColor = Color.White;
-            labelQuestion.Location = new Point(284, 36);
+            labelQuestion.BackColor = Color.Transparent;
+            labelQuestion.Font = new Font("Algerian", 27.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelQuestion.ForeColor = Color.Red;
+            labelQuestion.Location = new Point(220, 178);
             labelQuestion.Name = "labelQuestion";
-            labelQuestion.Size = new Size(169, 24);
+            labelQuestion.Size = new Size(366, 41);
             labelQuestion.TabIndex = 0;
             labelQuestion.Text = "ТУТ БУДЕТ ВОПРОС";
             // 
@@ -53,7 +56,7 @@
             // 
             buttonPath1.Anchor = AnchorStyles.Bottom;
             buttonPath1.BackColor = Color.Black;
-            buttonPath1.Font = new Font("Algerian", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonPath1.Font = new Font("Algerian", 21.75F);
             buttonPath1.ForeColor = Color.White;
             buttonPath1.Location = new Point(42, 3);
             buttonPath1.Name = "buttonPath1";
@@ -66,7 +69,7 @@
             // 
             buttonPath2.Anchor = AnchorStyles.Bottom;
             buttonPath2.BackColor = Color.Black;
-            buttonPath2.Font = new Font("Algerian", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonPath2.Font = new Font("Algerian", 21.75F);
             buttonPath2.ForeColor = Color.White;
             buttonPath2.Location = new Point(416, 3);
             buttonPath2.Name = "buttonPath2";
@@ -79,7 +82,7 @@
             // 
             buttonPath3.Anchor = AnchorStyles.Bottom;
             buttonPath3.BackColor = Color.Black;
-            buttonPath3.Font = new Font("Algerian", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonPath3.Font = new Font("Algerian", 21.75F);
             buttonPath3.ForeColor = Color.White;
             buttonPath3.Location = new Point(42, 42);
             buttonPath3.Name = "buttonPath3";
@@ -92,7 +95,7 @@
             // 
             buttonPath4.Anchor = AnchorStyles.Bottom;
             buttonPath4.BackColor = Color.Black;
-            buttonPath4.Font = new Font("Algerian", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonPath4.Font = new Font("Algerian", 21.75F);
             buttonPath4.ForeColor = Color.White;
             buttonPath4.Location = new Point(416, 42);
             buttonPath4.Name = "buttonPath4";
@@ -114,12 +117,39 @@
             panelButtons.Size = new Size(800, 80);
             panelButtons.TabIndex = 9;
             // 
+            // labelEnd
+            // 
+            labelEnd.Anchor = AnchorStyles.Top;
+            labelEnd.AutoSize = true;
+            labelEnd.BackColor = Color.Transparent;
+            labelEnd.Font = new Font("Algerian", 48F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelEnd.ForeColor = Color.White;
+            labelEnd.Location = new Point(-29, 188);
+            labelEnd.Name = "labelEnd";
+            labelEnd.Size = new Size(925, 71);
+            labelEnd.TabIndex = 10;
+            labelEnd.Text = "ВЫВОД ПОБЕДА ИЛИ СМЕРТЬ";
+            // 
+            // labelTime
+            // 
+            labelTime.AutoSize = true;
+            labelTime.BackColor = Color.Transparent;
+            labelTime.Font = new Font("Algerian", 36F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelTime.ForeColor = Color.Red;
+            labelTime.Location = new Point(0, 9);
+            labelTime.Name = "labelTime";
+            labelTime.Size = new Size(276, 54);
+            labelTime.TabIndex = 11;
+            labelTime.Text = "Your time:";
+            // 
             // FormGame
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(800, 450);
+            Controls.Add(labelTime);
+            Controls.Add(labelEnd);
             Controls.Add(panelButtons);
             Controls.Add(labelQuestion);
             KeyPreview = true;
@@ -140,5 +170,7 @@
         private Button buttonPath3;
         private Button buttonPath4;
         private Panel panelButtons;
+        private Label labelEnd;
+        private Label labelTime;
     }
 }
