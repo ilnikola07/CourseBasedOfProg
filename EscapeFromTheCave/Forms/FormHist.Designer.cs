@@ -41,13 +41,14 @@
             // 
             // labelStory
             // 
+            labelStory.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             labelStory.AutoSize = true;
             labelStory.BackColor = Color.Transparent;
-            labelStory.Font = new Font("Algerian", 48F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labelStory.Font = new Font("Algerian", 39.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             labelStory.ForeColor = SystemColors.ButtonHighlight;
-            labelStory.Location = new Point(2, 145);
+            labelStory.Location = new Point(219, 224);
             labelStory.Name = "labelStory";
-            labelStory.Size = new Size(191, 71);
+            labelStory.Size = new Size(151, 59);
             labelStory.TabIndex = 3;
             labelStory.Text = "Текст";
             labelStory.TextAlign = ContentAlignment.MiddleCenter;

@@ -34,6 +34,7 @@
             labelName = new Label();
             labelAbout = new Label();
             labelInc = new Label();
+            labelExit = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBoxMain).BeginInit();
             SuspendLayout();
             // 
@@ -54,7 +55,7 @@
             labelStart.Cursor = Cursors.Hand;
             labelStart.Font = new Font("Algerian", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             labelStart.ForeColor = SystemColors.ButtonHighlight;
-            labelStart.Location = new Point(190, 130);
+            labelStart.Location = new Point(190, 99);
             labelStart.Name = "labelStart";
             labelStart.Size = new Size(104, 30);
             labelStart.TabIndex = 1;
@@ -82,12 +83,13 @@
             labelAbout.Cursor = Cursors.Hand;
             labelAbout.Font = new Font("Algerian", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             labelAbout.ForeColor = SystemColors.ButtonHighlight;
-            labelAbout.Location = new Point(190, 173);
+            labelAbout.Location = new Point(190, 143);
             labelAbout.Name = "labelAbout";
             labelAbout.Size = new Size(99, 30);
             labelAbout.TabIndex = 3;
             labelAbout.Text = "ABOUT";
             labelAbout.TextAlign = ContentAlignment.MiddleCenter;
+            labelAbout.Click += labelAbout_Click;
             // 
             // labelInc
             // 
@@ -102,11 +104,27 @@
             labelInc.Text = "(C) 2026 Ulitka Soft Inc. All rights are unprotected, but stealing is bad\r\n";
             labelInc.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // labelExit
+            // 
+            labelExit.AutoSize = true;
+            labelExit.BackColor = Color.Transparent;
+            labelExit.Cursor = Cursors.Hand;
+            labelExit.Font = new Font("Algerian", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelExit.ForeColor = Color.Transparent;
+            labelExit.Location = new Point(205, 184);
+            labelExit.Name = "labelExit";
+            labelExit.Size = new Size(73, 30);
+            labelExit.TabIndex = 5;
+            labelExit.Text = "EXIT";
+            labelExit.TextAlign = ContentAlignment.MiddleCenter;
+            labelExit.Click += labelExit_Click;
+            // 
             // FormMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(497, 267);
+            Controls.Add(labelExit);
             Controls.Add(labelInc);
             Controls.Add(labelAbout);
             Controls.Add(labelName);
@@ -129,5 +147,6 @@
         private Label labelName;
         private Label labelAbout;
         private Label labelInc;
+        private Label labelExit;
     }
 }

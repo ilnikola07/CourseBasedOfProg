@@ -5,7 +5,7 @@ using System.IO;
 namespace EscapeLibrary
 {
     public enum CaveType { Normal, Victory, Death }
-    public class CavePath // Объект для одной строки (дороги)
+    public class CavePath // объект для одной строки (дороги)
     {
         public int FromId { get; set; }
         public int ToId { get; set; }
@@ -19,18 +19,18 @@ namespace EscapeLibrary
 
         public CaveType GetCaveType(int caveId)
         {
-            if (caveId == VICTORY_CAVE_ID) return CaveType.Victory;
-            if (caveId == DEATH_CAVE_ID) return CaveType.Death;
+            if (caveId == VICTORY_CAVE_ID) 
+                return CaveType.Victory;
+            if (caveId == DEATH_CAVE_ID) 
+                return CaveType.Death;
             return CaveType.Normal;
         }
 
-
-
         public List<CavePath> ReadMap(string filePath)
         {
-            List<CavePath> paths = new List<CavePath>();// Список, куда впишутся пути
+            List<CavePath> paths = new List<CavePath>();// список, куда впишутся пути
 
-            string[] lines = File.ReadAllLines(filePath);  // Считываем все строки файла в массив строк
+            string[] lines = File.ReadAllLines(filePath);  // считываются все строки файла в массив строк
 
             if (File.Exists(filePath))
             {
@@ -40,16 +40,11 @@ namespace EscapeLibrary
 
                     if (parts.Length != 3)
                     {
-                        continue; // Пропускаем некорректные строки
+                        continue; 
                     }
                     try
                     {
-                        paths.Add(new CavePath // Создаем объект пути и конвертируем текст в числа
-                        {
-                            FromId = int.Parse(parts[0]),
-                            ToId = int.Parse(parts[1]),
-                            Time = int.Parse(parts[2])
-                        });
+                        paths.Add(new CavePath{FromId = int.Parse(parts[0]),ToId = int.Parse(parts[1]),Time = int.Parse(parts[2])}); // Создаёт объект пути
                     }
                     catch (FormatException)
                     {
@@ -57,15 +52,24 @@ namespace EscapeLibrary
                     }
                 }
             }
-            return paths; // Возвращаем наполненный список путей
+            return paths; // возвращаем наполненный список путей
         }
 
-        public List<CavePath> GetAvailablePaths(List<CavePath> allPaths, int currentCaveId)
+        public List<CavePath> GetPaths(List<CavePath> allPaths, int currentCaveId)
         {
-            if (allPaths == null)
-                throw new ArgumentNullException(nameof(allPaths)); 
-            
-            return allPaths.FindAll(p => p.FromId == currentCaveId);// находим все пути, где FromId совпадает с текущей пещерой
+            if (allPaths == null) 
+                throw new ArgumentNullException(nameof(allPaths));
+
+            List<CavePath> result = new List<CavePath>();
+
+            foreach (CavePath p in allPaths)
+            {
+                if (p.FromId == currentCaveId)
+                {
+                    result.Add(p);
+                }
+            }
+            return result;
         }
     }    
 }

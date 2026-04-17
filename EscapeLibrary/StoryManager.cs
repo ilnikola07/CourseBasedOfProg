@@ -2,51 +2,54 @@
 {
     public class StoryManager
     { 
-
-        //НОРМАЛЬНЫЙ ТЕКСТ для предыстории:
-        //"Жар лавы обжигает лицо...",
-        //    "Путь наверх заблокирован обвалом.",
-        //    "Нужно найти другой выход, пока пещера не стала могилой!",
-        //    "Один из путников отбился от группы вулканологов. И это Вы! ", 
-        //    "Совсем скоро вулканические пещеры, которые вы изучали \n" +
-        //        " вновь затопит раскалённая магма. " ,
-        //    "Ваша задача - выбраться из этого пекла, пока вы не сгорите... \n" +
-        //        "или случайно не задохнётесь... БЕГИ!"
-
-        private readonly string[] _phrasesHist = // Массив строк с текстом для предыстории
+        private readonly string[] _phrasesHist = 
         {
-            "Ж",
-            "П.",
-            "Нгилой!",
-            "О. И это Вы! ", 
-            "Сизучали \n" +
-                " внгма. " ,
-            "Ваша зае... \n" +
-                "илиЕГИ!"
+            "Perhaps volcanoes are real branches\n" +
+                " of hell on Earth.",
+            "What's more, this one was dormant,\n" +
+                "and now it has woken up!",
+            "Just a few minutes ago, seismologists\n" +
+                " detected suspicious activity.",
+            "All researchers are ordered to\n" +
+                " evacuateimmediately from\n" +
+                " all underground complexes.",
+            "You need to find another way out before\n" +
+                " the cave becomes a grave!",
+            "Very soon, the volcanic caves you\n" +
+                " were studying will be flooded\n" +
+                "with glowing magma once again." ,
+            "But one of the scientists got\n" +
+                " separated from the group of \n" +
+                "volcanologists. And that’s you!",
+            "Tired of the heat, you fell asleep,\n" +
+                " but now you saw only \n" +
+                "  the running scientists",
+            "Your task is to get out of this\n" +
+                " hell before you burn... \n" +
+                "or suffocate... RUN!"
         };
 
-        private int _currentPhraseIndex = 0; // Указатели, этот помнит на какой фразе сейчас
-        private int _currentCharIndex = 0; // этот - на каком символе внутри
+        private int _currentPhrase = 0; // указатели: этот помнит на какой фразе сейчас
+        private int _currentChar = 0; // этот - на каком символе внутри
 
-        public string GetCurrentFullPhrase()// Возвращает текущую фразу целиком (нужно для пропуска анимации)  
+        public string GetCurrentFullPhrase()// возвращает текущую фразу целиком (нужно для пропуска анимации)  
         {
-            return _phrasesHist[_currentPhraseIndex];
+            return _phrasesHist[_currentPhrase];
         }   
 
-        public char? GetNextChar()// Возвращает следующую букву текущей фразы
+        public char? GetNextChar()// возвращает следующую букву текущей фразы
         {
-            if (_currentCharIndex < _phrasesHist[_currentPhraseIndex].Length)
-            {
-                return _phrasesHist[_currentPhraseIndex][_currentCharIndex++];
-            }
-            return null; // Буквы в этой фразе кончились
-        }       
-        public bool MoveToNextPhrase() // Переход к следующей фразе, возвращает false, если истории конец
+            if (_currentChar < _phrasesHist[_currentPhrase].Length)
+                return _phrasesHist[_currentPhrase][_currentChar++];
+            return null; // буквы в этой фразе кончились
+        } 
+        
+        public bool MoveToNextPhrase() // переход к следующей фразе, возвращает false, если истории конец
         {
-            if (_currentPhraseIndex < _phrasesHist.Length - 1)
+            if (_currentPhrase < _phrasesHist.Length - 1)
             {
-                _currentPhraseIndex++;
-                _currentCharIndex = 0;
+                _currentPhrase++;
+                _currentChar = 0;
                 return true;
             }
             return false;
@@ -56,7 +59,7 @@
         {
             get
             {
-                if (_currentCharIndex >= _phrasesHist[_currentPhraseIndex].Length) // Достигнут ли конец текста фразы
+                if (_currentChar >= _phrasesHist[_currentPhrase].Length) // достигнут ли конец текста фразы
                 {
                     return true;//если индекс больше или равен длине, значит, все буквы уже выведены на экран (фраза завершена)
                 }
@@ -67,11 +70,11 @@
             }
         }
 
-        public bool IsLastPhrase // Проверяет, является ли текущая фраза самой последней в массиве предыстории
+        public bool IsLastPhrase // проверяет, является ли текущая фраза самой последней в массиве предыстории
         {
             get
             {                
-                if (_currentPhraseIndex == _phrasesHist.Length - 1)// Совпадает ли индекс текущей фразы с индексом последней в массиве
+                if (_currentPhrase == _phrasesHist.Length - 1)// совпадает ли индекс текущей фразы с индексом последней в массиве
                 {
                     return true; // да, это последняя фраза
                 }

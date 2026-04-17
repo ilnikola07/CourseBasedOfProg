@@ -12,6 +12,8 @@ namespace EscapeFromTheCave.Forms
             labelNext.Text = string.Empty; // Чтобы убрать надпись в кнопке "далее"
         }
 
+        private StoryManager _story = new StoryManager(); // Объект, хранящий тексты
+
         private void FormHist_Load(object sender, EventArgs e) // Загрузка формы
         {
             labelStory.Text = ""; // Предварительно очищаем        
@@ -33,8 +35,6 @@ namespace EscapeFromTheCave.Forms
                 timerTypewriter.Start(); // Запускаем таймер текста (предысторию)
             }
         }
-
-        private StoryManager _story = new StoryManager(); // Объект, хранящий тексты
 
         private void timerTypewriter_Tick(object sender, EventArgs e) // Таймер для печати текста 
         {

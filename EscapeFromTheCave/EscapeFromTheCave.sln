@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EscapeFromTheCave", "Escape
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EscapeLibrary", "..\EscapeLibrary\EscapeLibrary.csproj", "{AD45F24E-1A5C-4817-A8D8-75FB6998D5D1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EscapeLibrary.Tests", "..\EscapeLibrary.Tests\EscapeLibrary.Tests.csproj", "{1924740B-40F1-4AAF-A2E9-80C96BB9B4DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{AD45F24E-1A5C-4817-A8D8-75FB6998D5D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD45F24E-1A5C-4817-A8D8-75FB6998D5D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD45F24E-1A5C-4817-A8D8-75FB6998D5D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1924740B-40F1-4AAF-A2E9-80C96BB9B4DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1924740B-40F1-4AAF-A2E9-80C96BB9B4DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1924740B-40F1-4AAF-A2E9-80C96BB9B4DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1924740B-40F1-4AAF-A2E9-80C96BB9B4DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

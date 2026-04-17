@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             labelQuestion = new Label();
             buttonPath1 = new Button();
             buttonPath2 = new Button();
@@ -36,6 +37,7 @@
             panelButtons = new Panel();
             labelEnd = new Label();
             labelTime = new Label();
+            timerTypewriterQuest = new System.Windows.Forms.Timer(components);
             panelButtons.SuspendLayout();
             SuspendLayout();
             // 
@@ -44,13 +46,14 @@
             labelQuestion.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             labelQuestion.AutoSize = true;
             labelQuestion.BackColor = Color.Transparent;
-            labelQuestion.Font = new Font("Algerian", 27.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            labelQuestion.ForeColor = Color.Red;
-            labelQuestion.Location = new Point(220, 178);
+            labelQuestion.Font = new Font("Algerian", 30F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelQuestion.ForeColor = Color.White;
+            labelQuestion.Location = new Point(225, 125);
             labelQuestion.Name = "labelQuestion";
-            labelQuestion.Size = new Size(366, 41);
+            labelQuestion.Size = new Size(370, 45);
             labelQuestion.TabIndex = 0;
             labelQuestion.Text = "ТУТ БУДЕТ ВОПРОС";
+            labelQuestion.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // buttonPath1
             // 
@@ -119,28 +122,33 @@
             // 
             // labelEnd
             // 
-            labelEnd.Anchor = AnchorStyles.Top;
+            labelEnd.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             labelEnd.AutoSize = true;
             labelEnd.BackColor = Color.Transparent;
             labelEnd.Font = new Font("Algerian", 48F, FontStyle.Regular, GraphicsUnit.Point, 0);
             labelEnd.ForeColor = Color.White;
-            labelEnd.Location = new Point(-29, 188);
+            labelEnd.Location = new Point(276, 187);
             labelEnd.Name = "labelEnd";
             labelEnd.Size = new Size(925, 71);
             labelEnd.TabIndex = 10;
             labelEnd.Text = "ВЫВОД ПОБЕДА ИЛИ СМЕРТЬ";
+            labelEnd.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // labelTime
             // 
             labelTime.AutoSize = true;
             labelTime.BackColor = Color.Transparent;
             labelTime.Font = new Font("Algerian", 36F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            labelTime.ForeColor = Color.Red;
+            labelTime.ForeColor = Color.White;
             labelTime.Location = new Point(0, 9);
             labelTime.Name = "labelTime";
             labelTime.Size = new Size(276, 54);
             labelTime.TabIndex = 11;
             labelTime.Text = "Your time:";
+            // 
+            // timerTypewriterQuest
+            // 
+            timerTypewriterQuest.Interval = 50;
             // 
             // FormGame
             // 
@@ -155,11 +163,12 @@
             KeyPreview = true;
             Name = "FormGame";
             Text = "Попробуй выберись";
-            Load += FormGame_Load;
+            //Load += FormGame_Load;
             KeyDown += MainForm_KeyDown;
             panelButtons.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
+
         }
 
         #endregion
@@ -172,5 +181,6 @@
         private Panel panelButtons;
         private Label labelEnd;
         private Label labelTime;
+        private System.Windows.Forms.Timer timerTypewriterQuest;
     }
 }
