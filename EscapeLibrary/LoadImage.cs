@@ -9,7 +9,7 @@ namespace EscapeLibrary
     {
         public Image LoadPhoto(int caveId)
         {
-            string path = Path.Combine(Application.StartupPath, "Caves", $"cave{caveId}.jpg");//идём к файлу в папке с ехе файлом
+            string path = Path.Combine(Application.StartupPath, "Caves", $"cave{caveId}.jpg");//идём к файлу в папке рядом с ехе файлом
             if (File.Exists(path))
                 return Image.FromFile(path); 
             return null;

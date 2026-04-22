@@ -8,7 +8,7 @@ namespace EscapeLibrary
 {
     public class TimeManager
     {
-        public int _timeLeft; // тут хранятся оставшиеся секунды
+        private int _timeLeft; // тут хранятся оставшиеся секунды
         private System.Windows.Forms.Timer _timer;
         public event Action<string> TimeChanged; // событие время изменилось (передаёт строку в форму)
         public event Action TimeElapsed; // событие время вышло
@@ -24,6 +24,11 @@ namespace EscapeLibrary
         public int GetRemainingTime()
         {
             return _timeLeft;
+        }
+
+        public void Stop()
+        {
+            _timer.Stop();
         }
 
         public void TriggerTimeElapsed()
@@ -71,7 +76,7 @@ namespace EscapeLibrary
         private void StopAndNotify() // общий метод для остановки и уведомления о конце времени
         {
             _timer.Stop();
-            TimeElapsed?.Invoke(); // иначе время кончилось
+            TimeElapsed?.Invoke(); 
         }
 
         public void Tick() // вспомогательный метод для тестов

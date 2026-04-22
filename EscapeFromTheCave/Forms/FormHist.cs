@@ -5,69 +5,70 @@ namespace EscapeFromTheCave.Forms
 {
     public partial class FormHist : Form
     {
+        private StoryManager _story = new StoryManager(); // объект, хранящий тексты
+        private System.Windows.Forms.Timer _fadeOutTimer; // ТАЙМЕР для управления плавным исчезновением
+
         public FormHist()
         {
             InitializeComponent();
-            labelStory.Text = string.Empty; // Чтобы убрать надпись в лейбле
-            labelNext.Text = string.Empty; // Чтобы убрать надпись в кнопке "далее"
+            labelStory.Text = string.Empty; // чтобы убрать надпись в лейбле
+            labelNext.Text = string.Empty; // чтобы убрать надпись в кнопке "далее"
         }
 
-        private StoryManager _story = new StoryManager(); // Объект, хранящий тексты
-
-        private void FormHist_Load(object sender, EventArgs e) // Загрузка формы
+        private void FormHist_Load(object sender, EventArgs e) // загрузка формы
         {
-            labelStory.Text = ""; // Предварительно очищаем        
-            labelNext.Text = "Skip"; // Текст на кнопке в начале
-            labelGetUp.Visible = false; // Скрываем кнопку подъема в самом начале
+            labelStory.Text = ""; // предварительно очищаем        
+            labelNext.Text = "Skip"; // текст на кнопке в начале
+            labelGetUp.Visible = false; // скрываем кнопку подъема в самом начале
             labelGetUp.Cursor = Cursors.Hand; // меняет курсор на руку при наведении
         }
 
-        private void timerFadeIn_Tick(object sender, EventArgs e) // Затемнение для красивого появляения
+        private void timerFadeIn_Tick(object sender, EventArgs e) // затемнение для красивого появляения
         {
             timerFadeIn.Interval = 30;
-            if (this.Opacity < 1)// Постепенно увеличиваем непрозрачность
+            if (this.Opacity < 1)// постепенно увеличиваем непрозрачность
             {
-                this.Opacity += 0.05; 
+                this.Opacity += 0.05;
             }
             else
             {
-                timerFadeIn.Stop(); // Когда форма полностью проявилась
-                timerTypewriter.Start(); // Запускаем таймер текста (предысторию)
+                timerFadeIn.Stop(); // когда форма полностью проявилась
+                timerTypewriter.Start(); // запускаем таймер текста (предысторию)
             }
         }
 
-        private void timerTypewriter_Tick(object sender, EventArgs e) // Таймер для печати текста 
+        private void timerTypewriter_Tick(object sender, EventArgs e) // таймер для печати текста 
         {
-            char? nextChar = _story.GetNextChar(); // Берем следующий символ
+            char? nextChar = _story.GetNextChar(); // берем следующий символ
             if (nextChar != null)
             {
-                labelStory.Text += nextChar; 
+                labelStory.Text += nextChar;
             }
             else
             {
-                timerTypewriter.Stop(); // Букв больше нет — останавливаем печать
-                labelNext.Text = "Next"; // Фраза допечатана
+                timerTypewriter.Stop(); // букв больше нет — останавливаем печать
+                labelNext.Text = "Next"; // фраза допечатана
                 if (_story.IsLastPhrase)
                 {
-                    ShowGetUpButton(); // Если сюжет кончился — показываем финальную кнопку
+                    ShowGetUpButton(); // если сюжет кончился — показываем финальную кнопку
                 }
                 else
                 {
-                    labelNext.Text = "Next"; // Если есть еще фразы, показываем далее
+                    labelNext.Text = "Next"; // если есть еще фразы, показываем далее
                     labelNext.Visible = true;
                 }
             }
         }
 
-        private void ShowGetUpButton() // Для появления кнопки подняться с пола
+        private void ShowGetUpButton() // для появления кнопки подняться с пола
         {
-            labelNext.Visible = false; 
-            labelGetUp.Visible = true; 
+            labelNext.Visible = false;
+            labelGetUp.Visible = true;
         }
 
         private void btnNext_Click(object sender, EventArgs e)
         {
-            if (timerTypewriter.Enabled) // Игрок нажал пропустить во время печати
+            if (timerTypewriter.Enabled) // игрок нажал пропустить во время печати
             {
                 timerTypewriter.Stop();
                 labelStory.Text = _story.GetCurrentFullPhrase();
@@ -81,7 +82,7 @@ namespace EscapeFromTheCave.Forms
                     labelNext.Text = "Next";
                 }
             }
-            else // Игрок нажал далее, когда текст уже напечатан
+            else // игрок нажал далее, когда текст уже напечатан
             {
                 if (_story.MoveToNextPhrase())
                 {
@@ -100,25 +101,30 @@ namespace EscapeFromTheCave.Forms
                 Application.Exit();
             }
         }
+
         private void labelGetUp_Click(object sender, EventArgs e)
         {
-            System.Windows.Forms.Timer fadeOutTimer = new System.Windows.Forms.Timer { Interval = 30 }; // Создаем таймер для плавного исчезновения текущей формы
-            fadeOutTimer.Tick += (s, ev) =>
+            _fadeOutTimer = new System.Windows.Forms.Timer { Interval = 30 };
+            _fadeOutTimer.Tick += OnFadeOutTick; // подписываемся на именованный метод
+            _fadeOutTimer.Start();
+        }
+
+        private void OnFadeOutTick(object sender, EventArgs e)
+        {
+            if (this.Opacity > 0)
             {
-                if (this.Opacity > 0)
-                {
-                    this.Opacity -= 0.05; // Уменьшаем видимость
-                }
-                else
-                {
-                    fadeOutTimer.Stop();
-                    FormGame game = new FormGame(1);
-                    game.Opacity = 0; // Делаем новую форму пока прозрачной
-                    game.Show();
-                    this.Hide();
-                }
-            };
-            fadeOutTimer.Start();
+                this.Opacity -= 0.05; // уменьшаем видимость
+            }
+            else
+            {
+                _fadeOutTimer.Stop();
+                _fadeOutTimer.Tick -= OnFadeOutTick; // отписываемся от события
+
+                FormGame game = new FormGame(1);
+                game.Opacity = 0; // делаем новую форму пока прозрачной
+                game.Show();
+                this.Hide();
+            }
         }
     }
 }

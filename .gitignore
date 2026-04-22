@@ -26,3 +26,13 @@ Spisok_PIN_II_KURSOVAYa.xlsx
 
 .DS_Store
 Thumbs.db
+
+
+
+# Результаты тестирования и отчеты о покрытии
+TestResults/
+coveragereport/
+coverage-report/
+*.coverage
+*.coveragexml
+*.pstat

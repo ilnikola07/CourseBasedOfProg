@@ -11,8 +11,6 @@ namespace EscapeLibrary
         private Dictionary<int, string> _caveTexts = new Dictionary<int, string>();
         private string _fullCurrentText = "";
         private int _charIndex = 0;
-        private string _currentQuestText = "";
-        private int _currentLetterIndex = 0;
 
 
         public void SetCurrentQuest(int caveId)
@@ -32,9 +30,6 @@ namespace EscapeLibrary
             return null;
         }
 
-
-        private Dictionary<int, string> _caveQuests = new Dictionary<int, string>();
-
         public void LoadQuestsFromFile(string fileName)
         {
             string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
@@ -47,7 +42,8 @@ namespace EscapeLibrary
             foreach (var line in lines)
             {
                 string trimmedLine = line.Trim();
-                if (string.IsNullOrEmpty(trimmedLine)) continue;
+                if (string.IsNullOrEmpty(trimmedLine))
+                    continue;
 
                 string firstWord = trimmedLine.Split(' ')[0];
 

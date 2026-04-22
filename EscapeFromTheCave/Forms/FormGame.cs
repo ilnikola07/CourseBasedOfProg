@@ -13,12 +13,12 @@ namespace EscapeFromTheCave.Forms
         private TimeManager _timeManager;
         private ButtonManager _buttonManager;
 
-        private MapManager _mapManager = new MapManager(); // Загрузчик карты
-        private List<CavePath> _allPaths = new List<CavePath>(); // Список дорог
+        private MapManager _mapManager = new MapManager(); // загрузчик карты
+        private List<CavePath> _allPaths = new List<CavePath>(); // список дорог
         private QuestManager _questManager = new QuestManager();
 
-        private Stack<(int caveId, int time)> _history = new Stack<(int, int)>(); // История посещений (очередь для возвращения назад)
-        private System.Windows.Forms.Timer _fadeInTimer; // Таймер для плавного появления        
+        private Stack<(int caveId, int time)> _history = new Stack<(int, int)>(); // история посещений (очередь для возвращения назад)
+        private System.Windows.Forms.Timer _fadeInTimer; // таймер для плавного появления        
         private System.Windows.Forms.Timer timerTypewriter; // для эффекта появляения
 
         private void MainForm_KeyDown(object sender, KeyEventArgs e) // выход по кнопке esc (НУЖЕН БЫЛ ПОКА НЕ БЫЛО ОФИЦИАЛЬНОЙ СМЕРТИ ИЛИ ПОБЕДЫ В ИГРЕ)
@@ -51,7 +51,7 @@ namespace EscapeFromTheCave.Forms
             this.BackgroundImageLayout = ImageLayout.Stretch; // растяжение
             this.DoubleBuffered = true; // от мерцания картинки
             this.BackColor = Color.Black;
-                        
+
 
             _buttonManager = new ButtonManager(new Button[] { buttonPath1, buttonPath2, buttonPath3, buttonPath4 }); // Создаём массив кнопок и передаём в класс управления кнопок
             _buttonManager.Clicks(OnPathButton_Click); // Обработчик клика
@@ -66,14 +66,14 @@ namespace EscapeFromTheCave.Forms
             _allPaths = _mapManager.ReadMap(mapPath); // содержит в себе всю структуру уровней
             _currentCaveId = startCaveId; // Ставим игрока в начальную пещеру
 
-            this.Resize += OnFormResize; 
+            this.Resize += OnFormResize;
             UpdateCaveState(); // Отрисовка в самый 1 раз
 
             this.Load += OnFormLoad;  // Для проявления         
         }
 
         private void OnFormLoad(object sender, EventArgs e)
-        {            
+        {
             _fadeInTimer = new System.Windows.Forms.Timer(); // Настройки таймера
             _fadeInTimer.Interval = 30;
             _fadeInTimer.Tick += OnFadeInTick; // Подписываемся на тики
@@ -102,7 +102,7 @@ namespace EscapeFromTheCave.Forms
         {
             var type = _mapManager.GetCaveType(_currentCaveId);
 
-            if (type == CaveType.Victory) 
+            if (type == CaveType.Victory)
             {
                 EndGame("VICTORY! " +
                     "\nYou got out and you were saved...", "win_screen.jpg");
@@ -110,7 +110,7 @@ namespace EscapeFromTheCave.Forms
                 return;
             }
 
-            if (type == CaveType.Death) 
+            if (type == CaveType.Death)
             {
                 EndGame(" YOU DIED!" +
                     "\nreason: you burned in lava", "death_screen.jpg");
@@ -125,7 +125,7 @@ namespace EscapeFromTheCave.Forms
             this.BackgroundImage = _imageLoader.LoadPhoto(_currentCaveId);
 
             var availablePaths = _mapManager.GetPaths(_allPaths, _currentCaveId); // ПОЛУЧАЕМ список дорог в текущей пещере
-            
+
             SetupButtons(availablePaths); // Настройка кнопок через ButtonManager
 
             _buttonManager.PositionButtons(this, panelButtons); // Позиционирование кнопок
@@ -147,40 +147,40 @@ namespace EscapeFromTheCave.Forms
         {
             if (sender is Button clickedButton && clickedButton.Tag is int nextCPathId)
             {
-                if (nextCPathId == -3) // Выход
+                if (nextCPathId == -3) // выход
                 {
                     Application.Exit();
                 }
-                else if (nextCPathId == -2) // Назад
+                else if (nextCPathId == -2) // назад
                 {
                     if (_history.Count > 0)
                     {
                         var (previousCaveId, timeSpent) = _history.Pop();
-                        _timeManager.SpendWeight(timeSpent); // Вычитаем время перехода
+                        _timeManager.SpendWeight(timeSpent); // вычитаем время перехода
                         _currentCaveId = previousCaveId;
                         UpdateCaveState();
                     }
                 }
-                else if (nextCPathId == -1) // Крик
+                else if (nextCPathId == -1) // крик
                 {
                     MessageBox.Show("You screamed, but screaming only takes away your time and energy...");
                     _timeManager.SpendWeight(5); // для отнятия 5 секунд
                 }
-                else // Переход вперед
+                else // переход вперед
                 {
                     var path = _allPaths.FirstOrDefault(p =>
                         p.FromId == _currentCaveId && p.ToId == nextCPathId);
 
                     if (path != null)
-                    {                       
-                        if (_timeManager.GetRemainingTime() < path.Time)  // Проверяем достаточно ли времени для перехода
+                    {
+                        if (_timeManager.GetRemainingTime() < path.Time)  // проверяем достаточно ли времени для перехода
                         {
                             _timeManager.SpendWeight(_timeManager.GetRemainingTime()); // тратим оставшееся время
                             _timeManager.TriggerTimeElapsed();
                             return;
-                        }                        
-                        _timeManager.SpendWeight(path.Time);// Вычитаем время перехода                        
-                        _history.Push((_currentCaveId, path.Time)); // Сохраняем информацию для возврата
+                        }
+                        _timeManager.SpendWeight(path.Time);// вычитаем время перехода                        
+                        _history.Push((_currentCaveId, path.Time)); // сохраняем информацию для возврата
                         _currentCaveId = nextCPathId;
                         UpdateCaveState();
                     }
@@ -190,7 +190,11 @@ namespace EscapeFromTheCave.Forms
 
         private void EndGame(string message, string imageName) //метод обработки конца игры
         {
+            _timeManager.Stop(); 
+            timerTypewriter.Stop(); // останавливаем печать текста
+
             Image endImage = _imageLoader.LoadEndPhoto(imageName);
+
             if (endImage != null)
             {
                 this.BackgroundImage = endImage;
@@ -199,18 +203,24 @@ namespace EscapeFromTheCave.Forms
             {
                 this.BackColor = (imageName.Contains("win")) ? Color.DarkGreen : Color.DarkRed;
             }
-
-            for (int i = 0; i < 3; i++)
+            
+            for (int i = 0; i < 4; i++)
             {
-                _buttonManager.HideButton(i);
+                _buttonManager.HideButton(i); // прячем все кнопки перед настройкой выхода
             }
 
-            _buttonManager.SetupExitButton(() => Application.Exit(), panelButtons); // Настройки кнопки выхода
+            _buttonManager.SetupExitButton(OnExitAction, panelButtons);
+
             labelEnd.Visible = true;
             labelEnd.Text = message; // вывод текста в лейбл
             labelEnd.ForeColor = Color.White;
             labelEnd.BringToFront();
             labelQuestion.Visible = false;
+        }
+
+        private void OnExitAction()
+        {
+            Application.Exit();
         }
 
         private void timerTypewriter_Tick(object sender, EventArgs e)
@@ -224,22 +234,31 @@ namespace EscapeFromTheCave.Forms
 
 
         private void SetupButtons(List<CavePath> availablePaths)
-        {
-            for (int i = 0; i < 4; i++)
+        {            
+            for (int i = 0; i < 4; i++) // сначала очищаем/скрываем все кнопки
             {
-                if (i == 3 && _currentCaveId != 1)
-                {
-                    _buttonManager.BackButton(i);
-                }                
-                else if (i < availablePaths.Count) // Кнопка пути
-                {
-                    var path = availablePaths[i];
-                    _buttonManager.PathButton(i, path.ToId, path.Time);
-                }
-                else // кнопка закричать
-                {
-                    _buttonManager.ScreamButton(i);
-                }
+                _buttonManager.HideButton(i);
+            }
+
+            int currentBtn = 0;
+                        
+            for (int i = 0; i < availablePaths.Count && currentBtn < 4; i++) // выводим доступные пути вперед
+            {
+                var path = availablePaths[i];
+                _buttonManager.PathButton(currentBtn, path.ToId, path.Time);
+                currentBtn++;
+            }
+
+            if (_currentCaveId != 1 && currentBtn < 4) 
+            {
+                _buttonManager.BackButton(currentBtn);
+                currentBtn++;
+            }
+
+            while (currentBtn < 4)
+            {
+                _buttonManager.ScreamButton(currentBtn);
+                currentBtn++;
             }
         }
     }

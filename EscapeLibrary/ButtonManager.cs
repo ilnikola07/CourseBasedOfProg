@@ -5,35 +5,37 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace EscapeLibrary
 {
-    [ExcludeFromCodeCoverage] // так как класс создан для работы с кнопками, смысла тестировать его нет
+    [ExcludeFromCodeCoverage]
     public class ButtonManager
     {
-        private readonly Button[] _pathButtons; // массив кнопок
+        private readonly Button[] _pathButtons;
 
         private static readonly Color BackgroundColor = Color.Black;
         private static readonly Color ForegroundColor = Color.White;
         private static readonly Color BorderColor = Color.White;
         private static readonly Color HoverColor = Color.Red;
         private static readonly Font ButtonFont = new Font("Algerian", 14, FontStyle.Bold);
-        private const int ButtonSpacing = 10; 
+        private const int ButtonSpacing = 10;
+        
+        private Action _exitAction; // поле для хранения действия выхода 
 
-        public ButtonManager(Button[] buttons) // принимает массив кнопок из формы
+        public ButtonManager(Button[] buttons)
         {
             if (buttons == null)
                 throw new ArgumentNullException(nameof(buttons));
 
-            _pathButtons = buttons; // сохраняем переданный массив
-            InitializeButtons(); 
+            _pathButtons = buttons;
+            InitializeButtons();
         }
 
-        private void InitializeButtons() 
+        private void InitializeButtons()
         {
-            foreach (var btn in _pathButtons) 
+            foreach (var btn in _pathButtons)
             {
                 if (btn != null)
                 {
-                    CourseStyle(btn); 
-                    ObvEffects(btn); 
+                    CourseStyle(btn);
+                    ObvEffects(btn);
                 }
             }
         }
@@ -41,43 +43,46 @@ namespace EscapeLibrary
         private void CourseStyle(Button btn)
         {
             btn.FlatStyle = FlatStyle.Flat;
-            btn.BackColor = BackgroundColor; 
+            btn.BackColor = BackgroundColor;
             btn.ForeColor = ForegroundColor;
             btn.FlatAppearance.BorderSize = 2;
             btn.Font = ButtonFont;
             btn.Cursor = Cursors.Hand;
+            btn.FlatAppearance.BorderColor = BorderColor; 
         }
 
         private void ObvEffects(Button btn)
         {
-            btn.MouseEnter += (s, e) =>
-            {
-                if (s is Button button)
-                    button.FlatAppearance.BorderColor = HoverColor;
-            };
+            btn.MouseEnter += OnButtonMouseEnter;
+            btn.MouseLeave += OnButtonMouseLeave;
+        }
 
-            btn.MouseLeave += (s, e) =>
-            {
-                if (s is Button button)
-                    button.FlatAppearance.BorderColor = BorderColor;
-            };
+        private void OnButtonMouseEnter(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            if (btn != null) btn.FlatAppearance.BorderColor = HoverColor;
+        }
+
+        private void OnButtonMouseLeave(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            if (btn != null) btn.FlatAppearance.BorderColor = BorderColor;
         }
 
         public void Clicks(EventHandler onClick)
         {
             foreach (var btn in _pathButtons)
             {
-                if (btn != null)
-                    btn.Click += onClick;
+                if (btn != null) btn.Click += onClick;
             }
         }
 
-        public void PathButton(int index, int caveId, int time) // настройки кнопки возможных путей в пещеры
+        public void PathButton(int index, int caveId, int time)
         {
             if (IsValidIndex(index))
             {
                 var btn = _pathButtons[index];
-                btn.Text = $"Cave {caveId} (Time: {time})";
+                btn.Text = "Cave " + caveId + " (Time: " + time + ")";
                 btn.Tag = caveId;
                 btn.Enabled = true;
                 btn.Visible = true;
@@ -91,7 +96,7 @@ namespace EscapeLibrary
             {
                 var btn = _pathButtons[index];
                 btn.Text = "Back";
-                btn.Tag = -2; // специальный id для возврата
+                btn.Tag = -2;
                 btn.Enabled = true;
                 btn.Visible = true;
                 btn.BringToFront();
@@ -104,50 +109,68 @@ namespace EscapeLibrary
             {
                 var btn = _pathButtons[index];
                 btn.Text = "Scream";
-                btn.Tag = -1; // специальный id для крика
+                btn.Tag = -1;
                 btn.Enabled = true;
                 btn.Visible = true;
                 btn.BringToFront();
             }
         }
 
-        public void HideButton(int index) // если надо убрать кнопку
+        public void HideButton(int index)
         {
             if (IsValidIndex(index))
                 _pathButtons[index].Visible = false;
         }
 
-        public void SetupExitButton(Action onClick, Panel panel) // настройки для конца игры, чтобы кнопка была на всю панель
+        public void SetupExitButton(Action onClick, Panel panel)
         {
-            var exitBtn = _pathButtons[3];
-            exitBtn.Text = "Exit the game";
-            exitBtn.Tag = -3;
-            exitBtn.Click += (s, e) => onClick?.Invoke();
+            int lastIndex = _pathButtons.Length - 1;
 
-            
-            int spacing = ButtonSpacing;
-            exitBtn.Location = new Point(spacing, spacing);
-            exitBtn.Size = new Size(panel.Width - (spacing * 2),panel.Height - (spacing * 2));
+            if (IsValidIndex(lastIndex))
+            {
+                var exitBtn = _pathButtons[lastIndex];
+                _exitAction = onClick; 
 
-            exitBtn.Visible = true;
-            exitBtn.Enabled = true;
-            exitBtn.BringToFront();
+                exitBtn.Text = "Exit the game";
+                exitBtn.Tag = -3;
+
+                exitBtn.Click -= OnExitButtonClick;
+                exitBtn.Click += OnExitButtonClick;
+
+                int spacing = ButtonSpacing;
+                exitBtn.Location = new Point(spacing, spacing);
+                exitBtn.Size = new Size(panel.Width - (spacing * 2), panel.Height - (spacing * 2));
+
+                exitBtn.Visible = true;
+                exitBtn.Enabled = true;
+                exitBtn.BringToFront();
+            }
         }
 
-
-        public void PositionButtons(Form form, Panel panel) // позиция кнопок на форме
+        private void OnExitButtonClick(object sender, EventArgs e)
         {
-            panel.Width = form.Width; // настройка панели
+            if (_exitAction != null)
+            {
+                _exitAction.Invoke();
+            }
+        }
+
+        public void PositionButtons(Form form, Panel panel)
+        {
+            panel.Width = form.Width;
             panel.Height = 120;
             panel.Top = form.Height - panel.Height;
             panel.Left = 0;
 
-            int spacing = ButtonSpacing; // размеры кнопок
+            int count = _pathButtons.Length; 
+            int spacing = ButtonSpacing;
             int buttonWidth = (form.Width - (3 * spacing)) / 2;
             int buttonHeight = (panel.Height - (3 * spacing)) / 2;
 
-            for (int i = 0; i < 4; i++) // позиция каждой кнопки
+            for (int i = 0; i < count; i++)
             {
+                if (_pathButtons[i] == null) continue;
+
                 int column = i % 2;
                 int row = i / 2;
 
@@ -158,22 +181,10 @@ namespace EscapeLibrary
                 _pathButtons[i].Location = new Point(x, y);
             }
         }
-        private bool IsValidIndex(int index) 
-        {
-            if (index < 0 || index >= _pathButtons.Length)
-            {
-                return false; 
-            }
-            return true;
-        }
 
-        //public Button GetButton(int index)
-        //{
-        //    if (IsValidIndex(index))
-        //    {
-        //        return _pathButtons[index];
-        //    }
-        //    return null;
-        //}
+        private bool IsValidIndex(int index)
+        {
+            return index >= 0 && index < _pathButtons.Length;
+        }
     }
 }

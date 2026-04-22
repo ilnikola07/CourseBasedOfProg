@@ -44,7 +44,7 @@ namespace EscapeLibrary
                     }
                     try
                     {
-                        paths.Add(new CavePath{FromId = int.Parse(parts[0]),ToId = int.Parse(parts[1]),Time = int.Parse(parts[2])}); // Создаёт объект пути
+                        paths.Add(new CavePath{FromId = int.Parse(parts[0]),ToId = int.Parse(parts[1]),Time = int.Parse(parts[2])}); // создаёт объект пути
                     }
                     catch (FormatException)
                     {

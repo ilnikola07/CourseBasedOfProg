@@ -44,13 +44,12 @@
             // labelQuestion
             // 
             labelQuestion.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            labelQuestion.AutoSize = true;
             labelQuestion.BackColor = Color.Transparent;
             labelQuestion.Font = new Font("Algerian", 30F, FontStyle.Regular, GraphicsUnit.Point, 0);
             labelQuestion.ForeColor = Color.White;
-            labelQuestion.Location = new Point(225, 125);
+            labelQuestion.Location = new Point(42, 144);
             labelQuestion.Name = "labelQuestion";
-            labelQuestion.Size = new Size(370, 45);
+            labelQuestion.Size = new Size(717, 42);
             labelQuestion.TabIndex = 0;
             labelQuestion.Text = "ТУТ БУДЕТ ВОПРОС";
             labelQuestion.TextAlign = ContentAlignment.MiddleCenter;
@@ -122,17 +121,16 @@
             // 
             // labelEnd
             // 
-            labelEnd.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            labelEnd.AutoSize = true;
+            labelEnd.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             labelEnd.BackColor = Color.Transparent;
             labelEnd.Font = new Font("Algerian", 48F, FontStyle.Regular, GraphicsUnit.Point, 0);
             labelEnd.ForeColor = Color.White;
-            labelEnd.Location = new Point(276, 187);
+            labelEnd.Location = new Point(0, 0);
             labelEnd.Name = "labelEnd";
-            labelEnd.Size = new Size(925, 71);
+            labelEnd.Size = new Size(925, 144);
             labelEnd.TabIndex = 10;
             labelEnd.Text = "ВЫВОД ПОБЕДА ИЛИ СМЕРТЬ";
-            labelEnd.TextAlign = ContentAlignment.MiddleCenter;
+            labelEnd.TextAlign = ContentAlignment.TopCenter;
             // 
             // labelTime
             // 
@@ -163,7 +161,6 @@
             KeyPreview = true;
             Name = "FormGame";
             Text = "Попробуй выберись";
-            //Load += FormGame_Load;
             KeyDown += MainForm_KeyDown;
             panelButtons.ResumeLayout(false);
             ResumeLayout(false);

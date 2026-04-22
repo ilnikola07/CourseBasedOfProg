@@ -1,0 +1,183 @@
+1
+The ground trembles beneath your boots. A deep, 
+rumbling roar echoes from the depths, and the air
+grows thick with heat and sulfur. The volcano is 
+waking. You have minutes to find the surface before
+the lava floods these tunnels or the oxygen runs out.
+
+Enter cave 2: A narrow, dark passage. A faint, 
+cool draft brushes your face.
+
+Enter cave 3: A wide archway. The air is drier 
+here, but you catch a slight breeze moving through.
+
+
+
+2
+A crossroads. The walls radiate intense heat, and 
+fine ash drifts from the ceiling. Breathing grows 
+heavier.
+
+Go Left (Cave 4): Dry, scorching air hits you. 
+The rocks here are hot to the touch.
+
+Go Straight (Cave 9): A tight crawl downward. The 
+air smells of damp earth and wet stone—a promising sign.
+
+Go Right (Cave 16): The corridor slopes upward. The air 
+is stagnant and heavy, making your chest tight.
+
+
+
+3
+A spacious grotto, but the ceiling feels dangerously low. 
+The temperature is rising fast. 
+
+Go Straight (Cave 16): Dead air. No movement, hard to 
+draw a full breath.
+
+Go Right (Cave 5): A strong, steady draft pulls you 
+forward. The walls are slick with condensation.
+
+
+
+4
+Cramped and suffocating. Sweat stings your eyes as the 
+heat becomes unbearable.
+
+Go Down (Cave 8): A sharp, cold wind cuts through the 
+passage. It feels like an exit route.
+
+Go Right (Cave 19): A blinding red glow pulses ahead. 
+The roar of boiling magma drowns out everything.
+
+
+
+5
+A large chamber. The volcano's roar is clearer now. 
+The air feels thin; oxygen is depleting.
+
+Go Left (Cave 6): Icy wind blows straight into the 
+tunnel. Water drips steadily from the ceiling. 
+This feels like the way out.
+
+Go Right (Cave 15): Warm, still air. The passage 
+feels like a dead end, but the draft is weak.
+
+
+
+6
+A damp grotto. The cool breeze makes it easier to breathe.
+
+Go Straight (Cave 16): Dry heat radiates from the walls. 
+The air feels recycled and stale.
+
+Go Left (Cave 7): The tunnel dips downward. 
+You smell moss and fresh groundwater.
+
+
+7
+Darkness closes in, but a cold current keeps pushing 
+against your back.
+
+Go Right (Cave 18): A small, silent alcove. The air 
+is completely still and stuffy. Bad sign.
+
+Go Left (Cave 13): A steep descent. Wind howls through 
+the passage, kicking up dust. The exit is definitely this way.
+
+
+
+8
+A low crawl. The stone is cold and wet under your hands.
+
+Go Forward (Cave 9): The sound of flowing water grows 
+louder. The air is crisp and clean.
+
+
+
+9
+A junction. Steam hisses from cracks in the floor below.
+
+Go Up (Cave 2): The heat lessens slightly, but it's a 
+long way back.
+
+
+Go Straight (Cave 10): A downward-sloping tunnel. 
+Pure, icy air rushes up from below. Definitely this way!
+
+
+
+10
+A long, sloping corridor. You pick up speed. A faint 
+blueish light glimmers in the distance.
+
+Go Forward (Cave 11): The light grows brighter. 
+The air is crystal clear. You're close!
+
+
+11
+A small antechamber. The volcanic roar fades, replaced 
+by the sound of open wind.
+
+Go Forward (Cave 12): Blinding daylight floods the 
+tunnel. Fresh, cool air rushes in.
+
+
+
+13
+A winding descent. Frost coats the walls, a stark 
+contrast to the volcano's heat.
+
+Go Down (Cave 14): The tunnel widens. The draft 
+strengthens into a steady breeze.
+
+
+14
+A deep, quiet grotto. The air here is remarkably fresh 
+and cool.
+
+Go Straight (Cave 12): The silhouette of the surface 
+opening is clearly visible ahead.
+
+
+
+15
+A massive chamber. The echo of cracking stone bounces 
+off the walls.
+
+Go Left (Cave 12): A powerful stream of cold 
+air rushes from this tunnel. This is the main exit!
+
+Go Right (Cave 17): Stagnant, ash-choked air. 
+No draft at all. Feels like a trap.
+
+
+
+16
+A high-ceilinged intersection. The walls are dry and 
+radiate heat.
+
+Go Left (Cave 2): Route back.
+
+Go Right (Cave 3): Route back.
+
+Go Down (Cave 6): Damp air and a cool updraft rise from 
+below. The descent looks safe.
+
+
+
+17 
+A narrow, bag-like tunnel. The air is superheated 
+and completely still. You're burning through oxygen
+fast. Turn back immediately.
+
+Only Choice: Retreat to Cave 15.
+
+
+
+18
+A small niche. Quiet, but oppressively hot. Zero airflow. 
+You're wasting precious time and oxygen.
+
+Only Choice: Retreat to Cave 7.

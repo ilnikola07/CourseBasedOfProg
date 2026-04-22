@@ -55,21 +55,6 @@
             return false;
         }
 
-        public bool IsPhraseFinished
-        {
-            get
-            {
-                if (_currentChar >= _phrasesHist[_currentPhrase].Length) // достигнут ли конец текста фразы
-                {
-                    return true;//если индекс больше или равен длине, значит, все буквы уже выведены на экран (фраза завершена)
-                }
-                else
-                {
-                    return false;
-                }
-            }
-        }
-
         public bool IsLastPhrase // проверяет, является ли текущая фраза самой последней в массиве предыстории
         {
             get
